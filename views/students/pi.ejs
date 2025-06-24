@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <!-- META PARA RESPONSIVIDADE -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="icon" type="image/png" sizes="128x128" href="/assets/logo_title.png">
+  <title>Contact Information ∙ St. Paul's</title>
+
+  <!-- CSS da página -->
+  <link rel="stylesheet" href="/css/pi/style.css">
+  <!-- Sidebar + switch -->
+  <link rel="stylesheet" href="/css/sidebar/style.css">
+  <link rel="stylesheet" href="/css/switch/style.css">
+  <!-- Fontes -->
+  <link href="https://fonts.cdnfonts.com/css/archer-2" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/century-gothic-paneuropean" rel="stylesheet">
+</head>
+<body>
+  <!-- HEADER MOBILE -->
+  <header class="mobile-header">
+    <button id="menu-toggle" class="hamburger" aria-label="Abrir menu">
+      <svg width="28" height="28" viewBox="0 0 24 24">
+        <path fill="#001D31" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- OVERLAY PARA FECHAR -->
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <!-- SIDEBAR -->
+  <div id="sidebar-container"></div>
+  <%- include('../layout/sidebar', { student, guardianId, activePage }) %>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <div class="main-content">
+    <%- include('../components/switch', { student }) %>
+
+    <span class="page-title-pi">Contact Information</span>
+
+    <div class="cards-row">
+      <!-- Guardian Card -->
+      <div class="card">
+        <div class="card-header">Guardian's Contact</div>
+        <div class="card-content">
+          <div class="field">
+            <label>Name</label>
+            <input type="text" value="<%= guardian.name_guardians %> <%= guardian.last_name_guardians %>" readonly>
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="text" value="<%= guardian.email_guardians %>" readonly>
+          </div>
+          <div class="field">
+            <label>Phone</label>
+            <input type="text" value="<%= guardian.phone_guardians %>" readonly>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medical Info Card -->
+      <div class="card">
+        <div class="card-header">Student's Medical Information</div>
+        <div class="card-content">
+          <div class="field">
+            <label>Doctor's Phone</label>
+            <input type="text" value="<%= student.doctor_number %>" readonly>
+          </div>
+          <label class="label-flag-notes">Flag notes</label>
+          <div class="notes">
+            <ul>
+              <li>Medical Notes: <%= student.doctor_flag_notes %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="/help">
+      <button class="help-button">HELP</button>
+    </a>
+  </div>
+
+  <script src="/js/sidebar-hamburger.js"></script>
+</body>
+</html>

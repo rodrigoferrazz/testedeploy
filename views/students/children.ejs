@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="128x128" href="/assets/logo_title.png">
+  <title>Choose your student ∙ St. Paul's</title>
+  <link rel="stylesheet" href="/css/change_child/style.css">
+  <link href="https://fonts.cdnfonts.com/css/archer-2" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/century-gothic-paneuropean" rel="stylesheet">
+</head>
+<body>
+  <img src="/assets/principal_logo.png" alt="Logo" class="logo" />
+
+  <div class="main-container">
+    <h2 class="title">SELECT ONE OF YOUR CHILDREN</h2>
+
+    <div class="children-list">
+      <% if (students.length > 0) { %>
+        <% students.forEach(student => { %>
+          <!-- Button for each child, with photo and name -->
+          <a class="child-btn" href="/students/<%= student.id %>/home">
+            <img src="<%= student.signed_photo_url %>" alt="Student photo" />
+            <div class="child-name"><%= student.student_name %> <%= student.student_last_name %></div>
+          </a>
+        <% }) %>
+      <% } else { %>
+        <p class="no-students">Nenhum filho cadastrado.</p>
+      <% } %>
+    </div>
+
+    <div class="logout-container">
+      <a href="/login">
+        <img src="/icons/box-arrow-left.png" class="logout-icon" />
+      </a>
+      <a href="/login" class="logout-btn">LOGOUT</a>
+    </div>
+
+    <a href="/help">
+      <button class="help-btn">HELP</button>
+    </a>
+  </div>
+</body>
+</html>

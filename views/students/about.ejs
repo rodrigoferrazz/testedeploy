@@ -1,0 +1,103 @@
+<!-- views/about.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- META PARA RESPONSIVIDADE -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="icon" type="image/png" sizes="128x128" href="/assets/logo_title.png">
+  <title>Pupil's Profile ∙ St. Paul's</title>
+  <!-- Fonts and styles  -->
+  <link href="https://fonts.cdnfonts.com/css/archer-2" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/century-gothic-paneuropean" rel="stylesheet">
+  <link rel="stylesheet" href="/css/about/style.css">
+  <link rel="stylesheet" href="/css/sidebar/style.css">
+  <link rel="stylesheet" href="/css/switch/style.css">
+</head>
+<body>
+  <!-- HEADER MOBILE -->
+  <header class="mobile-header">
+    <button id="menu-toggle" class="hamburger" aria-label="Abrir menu">
+      <svg width="28" height="28" viewBox="0 0 24 24">
+        <path fill="#001D31" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- OVERLAY MOBILE (só aparece quando sidebar está aberta) -->
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <!-- Sidebar -->
+  <div id="sidebar-container"></div>
+  <%- include('../layout/sidebar', { student, guardianId, activePage }) %>
+  <%- include('../components/switch', { student }) %>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-container">
+    <h2 class="page-title">Pupil's profile</h2>
+
+    <div class="profile-container">
+      <div class="student-photo">
+        <img src="<%= student.signed_photo_url %>" alt="Foto do aluno" />
+      </div>
+      <div class="info-block">
+        <label class="field-label">Name</label>
+        <p class="field-value"><%= student.student_name %> <%= student.student_last_name %></p>
+
+        <label class="field-label">Email</label>
+        <p class="field-value"><%= student.student_email %></p>
+
+        <label class="field-label">Address</label>
+        <p class="field-value"><%= student.address %></p>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label">Year code</label>
+            <p class="field-value"><%= year_code %></p>
+          </div>
+          <div class="field-group">
+            <label class="field-label">House</label>
+            <p class="field-value"><%= houseName %></p>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Form</label>
+            <p class="field-value"><%= form %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="teachers-section">
+      <h3 class="sub-title">Teachers and Tutor</h3>
+      <div class="teacher-cards">
+        <div class="teacher-card">
+          <div class="card-header">Tutor</div>
+          <div class="card-body">
+            <div class="teacher-name"><%= tutor.tutors_name %></div>
+            <div class="teacher-phone"><%= tutor.tutors_phone %></div>
+            <div class="teacher-email"><%= tutor.tutors_email %></div>
+          </div>
+        </div>
+
+        <% teachers.forEach(function(teacher) { %>
+          <div class="teacher-card">
+            <div class="card-header"><%= teacher.subject %></div>
+            <div class="card-body">
+              <div class="teacher-name"><%= teacher.teachers_name %></div>
+              <div class="teacher-phone"><%= teacher.teachers_phone %></div>
+              <div class="teacher-email"><%= teacher.teachers_email %></div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <a href="/help">
+      <button class="help-button">HELP</button>
+    </a>
+    
+  </div>
+
+  <script src="/js/sidebar-hamburger.js"></script>
+</body>
+</html>

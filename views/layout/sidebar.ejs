@@ -1,0 +1,86 @@
+<link rel="stylesheet" href="/css/sidebar/style.css">
+
+<!-- Botão hamburguer só para mobile, fora do <nav> -->
+<button id="menu-toggle" class="hamburger" aria-label="Abrir menu" style="display:none;">
+  <svg width="28" height="28" viewBox="0 0 24 24">
+    <path fill="#fff" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/>
+  </svg>
+</button>
+<nav id="sidebar">
+  <ul>
+    <!-- Logo: permanece sempre sem "active" -->
+    <a href="/students/<%= student.id %>/home">
+      <li class="logo">
+        <img src="/assets/principal_logo.png" width="65%" />
+      </li>
+    </a>
+    <% const page = (typeof activePage !== 'undefined') ? activePage : ''; %>
+
+    <!-- Exemplo: About -->
+    <li class="<%= page === 'about' ? 'active' : '' %>">
+      <a href="/students/<%= student.id %>/about">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+          <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+          <path fill-rule="evenodd"
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8
+                   m8-7a7 7 0 0 0-5.468 11.37
+                   C3.242 11.226 4.805 10 8 10
+                   s4.757 1.225 5.468 2.37
+                   A7 7 0 0 0 8 1"/>
+        </svg>
+        <span class="text-sidebar-standart">Pupil's Profile</span>
+      </a>
+    </li>
+
+    <!-- Personal Info. (rota protegida) -->
+    <li class="<%= page === 'pi' ? 'active' : '' %>">
+      <a href="/guardians/<%= guardianId %>/pi">
+        <img src="/icons/contact.svg" alt="Contact Info Icon" class="sidebar-icon" />
+        <span class="text-sidebar-standart">Contact Info.</span>
+      </a>
+    </li>
+
+    <!-- Timetable -->
+    <li class="<%= page === 'timetable' ? 'active' : '' %>">
+      <a href="/students/<%= student.id %>/timetable">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+          <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1
+                   a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2
+                   a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5
+                   a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12
+                   a1 1 0 0 0 1-1V4z"/>
+        </svg>
+        <span class="text-sidebar-standart">Timetable</span>
+      </a>
+    </li>
+
+    <!-- Reports -->
+    <li class="<%= page === 'reports' ? 'active' : '' %>">
+      <a href="/students/<%= student.id %>/reports">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+          <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5
+                   v10.528c0 .3-.05.654-.238.972h.738
+                   a.5.5 0 0 0 .5-.5v-9
+                   a.5.5 0 0 1 1 0v9
+                   a1.5 1.5 0 0 1-1.5 1.5H1.497
+                   A1.497 1.497 0 0 1 0 13.5z
+                   M12 14c.37 0 .654-.211.853-.441
+                   .092-.106.147-.279.147-.531V2.5
+                   a.5.5 0 0 0-.5-.5h-11
+                   a.5.5 0 0 0-.5.5v11
+                   c0 .278.223.5.497.5z"/>
+          <path d="M2 3h10v2H2zm0 3h4v3H2zm0 4h4v1H2
+                   zm0 2h4v1H2zm5-6h2v1H7zm3 0h2v1h-2z
+                   M7 8h2v1H7zm3 0h2v1h-2zm-3 2h2v1H7
+                   zm3 0h2v1h-2zm-3 2h2v1H7zm3 0h2v1h-2z"/>
+        </svg>
+        <span class="text-sidebar-standart">Reports</span>
+      </a>
+    </li>
+
+    <a href="/login" class="logout-li-sidebar">
+      <img src="/icons/box-arrow-left.svg" class="logout-img-sidebar"/>
+      <span class="logout-text-sidebar">LOGOUT</span>
+    </a>
+  </ul>
+</nav>

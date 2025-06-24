@@ -1,0 +1,325 @@
+/* General body styling for the homepage */
+body {
+  background: #f3f3f3;
+  font-family: 'Archer', 'Century Gothic', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Header with logo and photo */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22.5px 45px 0 22.5px;
+  box-sizing: border-box;
+}
+
+.logo img {
+  height: 90px;
+}
+
+.student-photo img {
+  width: 37.5px;
+  height: 37.5px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 1.5px 3.75px rgba(0, 0, 0,0.2);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  flex-grow: 1;
+  padding: 15px;
+}
+
+.welcome-title {
+  font-family: 'Archer', serif;
+  font-size: 28px;
+  font-weight: bold;
+  color: #001D31;
+  text-align: center;
+  margin: 15px 0;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 375px);
+  gap: 30px;
+  justify-content: center;
+  max-width: 780px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4.5px 13.5px rgba(0, 0, 0,0.2);
+  text-decoration: none;
+  color: #333;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 375px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-2.25px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0,0.25);
+}
+
+.card-header {
+  background: #820021;
+  color: #fff;
+  font-family: 'Archer', serif;
+  font-size: 18px;
+  height: 52.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: normal;
+}
+
+.card-body {
+  flex: 1;
+  padding: 9px;
+  font-family: 'Century Gothic', sans-serif;
+  font-size: 12px;
+  color: #555;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.help-button {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  background-color: #8B1538;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 15px;
+  font-family: 'Archer', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  cursor: pointer;
+  box-shadow: 0 1.5px 3px rgba(0,0,0,0.2);
+  width: 142.5px;
+  height: 22.5px;
+  line-height: 1.4;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.help-button:hover {
+  background-color: #820021;
+  transform: translateY(-2px);
+}
+
+.logout-container {
+  position: fixed;
+  left: 45px;
+  bottom: 22.5px;
+  display: flex;
+  align-items: center;
+}
+
+.logout-icon {
+  width: 18px;
+  height: auto;
+}
+
+.logout-btn {
+  margin-left: 15px;
+  margin-bottom: 4.5px;
+  background-color: transparent;
+  color: #820021;
+  font-family: 'Century Gothic', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Responsiveness: Tablets and medium screens */
+@media (max-width: 1024px) {
+  main {
+    padding: 10px;
+  }
+  .welcome-title {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+  .card-grid {
+    grid-template-columns: repeat(2, 300px);
+    gap: 20px;
+    max-width: 620px;
+  }
+  .card {
+    width: 300px;
+    height: 120px;
+  }
+  .card-header {
+    font-size: 16px;
+    height: 45px;
+  }
+  .card-body {
+    font-size: 11px;
+    padding: 8px;
+  }
+  .header {
+    padding: 18px 30px 0 18px;
+  }
+  .logo img {
+    height: 75px;
+  }
+  .student-photo img {
+    width: 30px;
+    height: 30px;
+  }
+  .logout-container {
+    left: 30px;
+    bottom: 18px;
+  }
+  .logout-icon {
+    width: 15px;
+  }
+  .logout-btn {
+    margin-left: 10px;
+    font-size: 11px;
+  }
+  .help-button {
+    width: 120px;
+    height: 20px;
+    font-size: 11px;
+  }
+}
+
+/* Responsiveness: Smartphones */
+@media (max-width: 768px) {
+  main {
+    padding: 10px;
+    min-height: calc(100vh - 60px);
+  }
+  .welcome-title {
+    font-size: 20px;
+    margin: 10px 0;
+  }
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    max-width: 90%;
+  }
+  .card {
+    width: 100%;
+    height: 120px;
+  }
+  .card-header {
+    font-size: 16px;
+    height: 45px;
+  }
+  .card-body {
+    font-size: 11px;
+    padding: 8px;
+  }
+  .header {
+    padding: 15px 20px 0 15px;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .logo img {
+    height: 60px;
+  }
+  .student-photo img {
+    width: 25px;
+    height: 25px;
+    margin-left: auto;
+  }
+  .logout-container {
+    position: fixed;
+    left: 15px;
+    bottom: 15px;
+  }
+  .logout-icon {
+    width: 14px;
+  }
+  .logout-btn {
+    margin-left: 8px;
+    font-size: 10px;
+  }
+  .help-button {
+    bottom: 15px;
+    right: 15px;
+    width: 100px;
+    height: 18px;
+    font-size: 10px;
+  }
+}
+
+/* Responsiveness: Very small screens */
+@media (max-width: 480px) {
+  main {
+    padding: 8px;
+    min-height: calc(100vh - 50px);
+  }
+  .welcome-title {
+    font-size: 18px;
+    margin: 8px 0;
+  }
+  .card-grid {
+    gap: 12px;
+    max-width: 95%;
+  }
+  .card {
+    height: 100px;
+  }
+  .card-header {
+    font-size: 14px;
+    height: 40px;
+  }
+  .card-body {
+    font-size: 10px;
+    padding: 6px;
+  }
+  .header {
+    padding: 10px 15px 0 10px;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .logo img {
+    height: 50px;
+  }
+  .student-photo img {
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+  }
+  .logout-container {
+    left: 10px;
+    bottom: 10px;
+  }
+  .logout-icon {
+    width: 12px;
+  }
+  .logout-btn {
+    margin-left: 6px;
+    font-size: 9px;
+  }
+  .help-button {
+    bottom: 10px;
+    right: 10px;
+    width: 80px;
+    height: 16px;
+    font-size: 9px;
+  }
+}

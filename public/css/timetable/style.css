@@ -1,0 +1,344 @@
+/* Reset básico */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+  background-color: #f0f3f3;
+  color: #001D31;
+  font-family: "Century Gothic", sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Container do header on mobile */
+.mobile-header {
+  display: none; /* Hidden by default, shown on mobile */
+  padding: 0.5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f3f3f3;
+  z-index: 100;
+}
+
+/* Hamburger button */
+.hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* Container geral (à direita da sidebar) */
+.main-container {
+  margin-left: 11.71875rem;
+  padding: 0.1875rem 0.75rem 3.75rem;
+  width: calc(100% - 11.71875rem);
+  transition: margin-left 0.3s ease, width 0.3s ease;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Título da página */
+.page-title {
+  margin-left: 0.5rem;
+  display: block;
+  font-size: 1.625rem;
+  font-family: "Archer", serif;
+  font-weight: bold;
+  padding-top: 2.1rem;
+  color: #001D31;
+}
+
+.help-button {
+  position: fixed;
+  bottom: 0.9375rem;
+  right: 0.9375rem;
+  background-color: #8B1538;
+  color: white;
+  border: none;
+  border-radius: 0.9375rem;
+  font-family: var(--font-secondary);
+  cursor: pointer;
+  box-shadow: 0 0.09375rem 0.1875rem rgba(0, 0, 0, 0.2);
+  width: 8.90625rem;
+  height: 1.40625rem;
+  font-size: 0.75rem;
+  font-family: 'Archer', sans-serif;
+}
+
+.help-button:hover {
+  background-color: #820021;
+  transform: translateY(-2px);
+}
+
+/* Paginação de Weeks (centralizada) */
+.timetable-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 1rem;
+}
+
+/* Container do timetable */
+.timetable-container {
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 200px;
+  position: relative;
+}
+
+/* Imagem do timetable */
+.timetable-container img {
+  max-width: 70vw;
+  max-height: 60vh;
+  border-radius: 12px;
+  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.14);
+  display: block;
+  object-fit: contain;
+  cursor: grab;
+  transition: box-shadow 0.2s, border-radius 0.2s;
+}
+
+/* Botões de navegação da semana */
+.week-btn {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: #001D31;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.week-btn:hover:not(:disabled) {
+  color: #820021;
+}
+
+.week-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* Texto da semana atual */
+.current-week {
+  font-family: "Archer", serif;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #001D31;
+  margin: 0 0.5rem;
+  padding-top: 0.25rem;
+  line-height: 1.4;
+}
+
+/* Controles de zoom */
+.zoom-controls {
+  position: static;
+  margin: 1rem auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 29, 49, 0.95);
+  padding: 0.4rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  z-index: 20;
+  gap: 0.8rem;
+  border: 1px solid #fff2;
+  backdrop-filter: blur(2px);
+}
+
+.zoom-btn {
+  background: linear-gradient(135deg, #fff 60%, #e6e6e6 100%);
+  border: none;
+  color: #001D31;
+  font-size: 1rem;
+  font-family: "Archer", serif;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.10);
+  font-weight: bold;
+  transition: background 0.18s, color 0.18s, transform 0.12s;
+  outline: none;
+}
+
+.zoom-btn:hover:not(:disabled) {
+  background: #820021;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.zoom-btn:active:not(:disabled) {
+  background: #f0f0f0;
+  color: #820021;
+  transform: scale(0.95);
+}
+
+.zoom-btn:focus {
+  outline: 2px solid #820021;
+}
+
+.zoom-level {
+  color: #FFF;
+  font-size: 0.85rem;
+  font-family: "Archer", serif;
+  font-weight: bold;
+  min-width: 2.2rem;
+  text-align: center;
+  background: #001D31;
+  border-radius: 4px;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid #fff2;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsividade: Tablets e telas médias */
+@media (max-width: 1024px) {
+  .main-container {
+    margin-left: 0;
+    width: 100%;
+  }
+  .mobile-header {
+    display: block;
+  }
+}
+
+/* Responsividade: Smartphones */
+@media (max-width: 768px) {
+  .mobile-header {
+    display: block;
+    padding: 0.3rem;
+  }
+  .main-container {
+    padding: 0.5rem;
+    margin-top: 2.5rem; /* 40px = 2.5rem (assuming 1rem = 16px) */
+  }
+  .page-title {
+    font-size: 1.25rem;
+    margin-left: 0.5rem;
+    padding-top: 0.5rem;
+  }
+  .timetable-container {
+    min-width: 100%;
+    padding: 0 0.5rem;
+  }
+  .timetable-container img {
+    max-width: 100vw;
+    max-height: 55vh;
+    border-radius: 8px;
+  }
+  .timetable-pagination {
+    margin-bottom: 0.5rem;
+  }
+  .week-btn {
+    font-size: 1rem;
+    padding: 0 0.3rem;
+  }
+  .current-week {
+    font-size: 0.875rem;
+    margin: 0 0.4rem;
+  }
+  .help-button {
+    bottom: 0.75rem;
+    right: 0.75rem;
+    width: 4rem;
+    height: 1.8rem;
+    font-size: 0.75rem;
+    border-radius: 10px;
+  }
+  .zoom-controls {
+    margin: 0.8rem auto 0;
+    padding: 0.3rem 0.8rem;
+    border-radius: 10px;
+    gap: 0.6rem;
+  }
+  .zoom-btn {
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+  }
+  .zoom-level {
+    font-size: 0.8rem;
+    padding: 0.15rem 0.3rem;
+    min-width: 2rem;
+    border-radius: 3px;
+  }
+}
+
+/* Responsividade: Telas muito pequenas */
+@media (max-width: 480px) {
+  .mobile-header {
+    display: block;
+    padding: 0.2rem;
+  }
+  .main-container {
+    padding: 0.3rem;
+    margin-top: 2.5rem; /* 40px = 2.5rem */
+  }
+  .page-title {
+    font-size: 1rem;
+    margin-left: 0.3rem;
+    padding-top: 0.3rem;
+  }
+  .timetable-container {
+    min-width: 100%;
+    padding: 0 0.3rem;
+  }
+  .timetable-container img {
+    max-width: 100vw;
+    max-height: 50vh;
+    border-radius: 6px;
+  }
+  .timetable-pagination {
+    margin-bottom: 0.3rem;
+  }
+  .week-btn {
+    font-size: 0.9rem;
+    padding: 0 0.2rem;
+  }
+  .current-week {
+    font-size: 0.75rem;
+    margin: 0 0.3rem;
+  }
+  .help-button {
+    bottom: 0.5rem;
+    right: 0.5rem;
+    width: 3.5rem;
+    height: 1.5rem;
+    font-size: 0.7rem;
+    border-radius: 8px;
+  }
+  .zoom-controls {
+    margin: 0.5rem auto 0;
+    padding: 0.2rem 0.6rem;
+    border-radius: 8px;
+    gap: 0.4rem;
+  }
+  .zoom-btn {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+  }
+  .zoom-level {
+    font-size: 0.75rem;
+    padding: 0.1rem 0.25rem;
+    min-width: 1.8rem;
+    border-radius: 2px;
+  }
+}

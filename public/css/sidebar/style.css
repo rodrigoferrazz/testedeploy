@@ -1,0 +1,202 @@
+/* =======================
+   Container fixo do sidebar
+   ======================= */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 187.5px; /* Unchanged (desktop) */
+  height: 100vh;
+  padding: 3.75px 0.75em;
+  background-color: rgba(130, 0, 33, 0.9);
+  border-right: 1px solid #42434a;
+  box-sizing: border-box;
+}
+
+/* =======================
+   Lista vertical de itens
+   ======================= */
+#sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* =======================
+   Logo no topo
+   ======================= */
+#sidebar li.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75em 0;
+}
+
+/* Dá um espaço logo abaixo do logo */
+#sidebar > ul > li.logo + li {
+  margin-top: 15px;
+}
+
+/* =======================
+   Estilo padrão de cada link
+   ======================= */
+#sidebar ul li a {
+  display: flex;
+  align-items: center;
+  width: 161.25px;
+  padding: 0.6375em;
+  gap: 0.75em;
+  border-radius: 0.375em;
+  text-decoration: none;
+  color: #EBACAA;
+  transition: background-color 0.2s, color 0.2s;
+  box-sizing: border-box;
+}
+
+/* Faz o <svg> herdar a cor do <a> via currentColor */
+#sidebar ul li a svg {
+  width: 22.5px;
+  height: 22.5px;
+  fill: currentColor;
+}
+
+/* =======================
+   Hover (passar mouse) - Opcional
+   ======================= */
+#sidebar ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* =======================
+   Estado “ativo” / highlighted
+   ======================= */
+#sidebar ul li.active a {
+  background-color: #561223;
+  color: #ffffff;
+}
+
+/* Garante que o SVG realmente fique branco */
+#sidebar ul li.active a svg {
+  fill: #ffffff;
+}
+
+/* =======================
+   Logout fixado no final
+   ======================= */
+.logout-li-sidebar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: 22.5px;
+  font-style: none;
+  text-decoration: none;
+}
+
+/* Texto do logout */
+.logout-text-sidebar {
+  font-family: 'Century Gothic', sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  color: #EBACAA;
+  margin-left: 0.375em;
+  transition: color 0.2s;
+}
+
+/* Hover do logout */
+.logout-li-sidebar:hover .logout-text-sidebar {
+  color: #ffffff;
+}
+
+/* Caso queira inverter o SVG do logout no hover */
+.logout-li-sidebar:hover img {
+  filter: brightness(0) invert(1);
+}
+
+.text-sidebar-standart {
+  font-weight: bold;
+  font-family: 'Century Gothic', sans-serif;
+  font-size: 12px;
+}
+
+.sidebar-icon {
+  width: 22.5px;
+  height: 22.5px;
+}
+
+* Estilo para imagens SVG */
+#sidebar ul li a img.sidebar-icon {
+  width: 22.5px;
+  height: 22.5px;
+  filter: invert(75%) sepia(25%) saturate(500%) hue-rotate(310deg) brightness(95%) contrast(90%); /* Aproxima #EBACAA */
+}
+
+#sidebar ul li a:hover img.sidebar-icon {
+  filter: brightness(0) invert(1); /* #FFFFFF no hover */
+}
+
+#sidebar ul li.active a img {
+  filter: brightness(0) invert(1); /* Branco no estado ativo */
+}
+
+#sidebar ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* =======================
+   Estilos para Mobile
+   ======================= */
+@media (max-width: 768px) {
+  #sidebar {
+    position: fixed;
+    top: 0;
+    left: -206.25px; /* -187.5px * 1.10 */
+    width: 206.25px; /* 187.5px * 1.10 */
+    height: 100vh; /* Unchanged for infinite height */
+    z-index: 9999;
+    background-color: rgba(130, 0, 33, 0.9);
+    transition: left 0.3s cubic-bezier(.4,0,.2,1);
+    pointer-events: none;
+  }
+  #sidebar.open {
+    left: 0;
+    pointer-events: auto;
+  }
+  .main-container {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  .hamburger {
+    display: block;
+    position: fixed;
+    top: 0.825rem; /* 0.75rem * 1.10 */
+    left: 0.825rem; /* 0.75rem * 1.10 */
+    z-index: 1100;
+    background: none;
+    border: none;
+    padding: 0.4125rem; /* 0.375rem * 1.10 */
+  }
+  /* Esconde o botão hamburguer quando a sidebar está aberta */
+  #sidebar.open ~ .hamburger,
+  .hamburger[style*="display: none"] {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  #sidebar {
+    left: 0 !important;
+    pointer-events: auto !important;
+  }
+  .sidebar-overlay {
+    display: none !important;
+  }
+  .hamburger {
+    display: none !important;
+  }
+}

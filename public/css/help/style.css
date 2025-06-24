@@ -1,0 +1,73 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  font-family: 'Century Gothic', sans-serif;
+  background-color: #f2f2f2;
+}
+
+.header .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+}
+.header .logo img {
+  height: 7.5rem;
+}
+
+.help-card {
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+  width: 400px;
+  max-width: 90%;
+    position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.help-card__header {
+  background-color: #70031b;
+  color: #fff;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 2rem;
+  font-family: 'Archer';
+  font-weight: 400;
+}
+
+.help-card__body {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-family: 'Century Gothic', sans-serif;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+.help-card__footer {
+  text-align: center;
+  padding: 0rem 0rem 1.5rem 0rem;
+}
+.back-btn {
+  background-color: #70031b;
+  color: #fff;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.75rem 2rem;
+  font-size: 1.5rem;
+  font-family: 'Archer';
+  cursor: pointer;
+  font-weight: 400;
+  transition: background-color 0.2s ease;
+}
+.back-btn:hover {
+  background-color: #55021a;
+}

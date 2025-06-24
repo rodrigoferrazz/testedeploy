@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <link rel="icon" type="image/png" sizes="128x128" href="/assets/logo_title.png">
+  <title>Reports ∙ St. Paul's</title>
+  <link href="https://fonts.cdnfonts.com/css/archer-2" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/century-gothic-paneuropean" rel="stylesheet">
+  <link rel="stylesheet" href="/css/reports/style.css">
+  <link rel="stylesheet" href="/css/sidebar/style.css">
+  <link rel="stylesheet" href="/css/switch/style.css">
+  <!-- Include pdf.js library from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
+</head>
+<body>
+  <!-- HEADER MOBILE -->
+  <header class="mobile-header">
+    <button id="menu-toggle" class="hamburger" aria-label="Abrir menu">
+      <svg width="30" height="30" viewBox="0 0 24 24">
+        <path fill="#001D31" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- OVERLAY PARA FECHAR -->
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <div id="sidebar-container"></div>
+  <%- include('../layout/sidebar', { student, guardianId, activePage }) %>
+  <%- include('../components/switch', { student }) %>
+
+  <main class="main-content">
+    <section class="reports">
+      <h1 class="reports-title">Reports</h1>
+      <div class="reports-table">
+        <table class="reports-table-content">
+          <thead class="table-header">
+            <tr class="table-header-items">
+              <th class="table-header-items1">QUARTER</th>
+              <th class="table-header-items2">YEAR</th>
+              <th class="table-header-items3">PREVIEW</th>
+              <th class="table-header-items4">DOWNLOAD</th>
+            </tr>
+          </thead>
+          <tbody class="table-body">
+            <% if (reports && reports.length > 0) { %>
+              <% reports.forEach((report, idx) => { 
+                   const rowNum = idx + 1;
+              %>
+                <tr class="table-body-r<%= rowNum %>">
+                  <td class="r<%= rowNum %>-item1"><%= report.quarter %></td>
+                  <td class="r<%= rowNum %>-item2"><%= report.year %></td>
+                  <td>
+                    <span class="preview-button" data-pdf-url="<%= report.file_url %>">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#000000" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                      </svg>
+                    </span>
+                  </td>
+                  <td>
+                    <a class="r<%= rowNum %>-download" 
+                       href="<%= report.file_url %>" 
+                       download="<%= report.file_name %>">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#001f3f" class="bi bi-download" viewBox="0 0 16 16">
+                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 0 0-.708.708l3 3z"/>
+                      </svg>
+                    </a>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="4">No reports available</td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PDF Preview Modal -->
+    <div class="pdf-preview-modal" id="pdf-preview-modal">
+      <section class="pdf-preview-section">
+        <h2 class="preview-title">Report Preview</h2>
+        <button class="close-preview" id="close-preview">×</button>
+        <div class="pdf-preview-container" id="pdf-preview">
+          <div class="pdf-preview-loading">Loading report...</div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Benes Comment Modal -->
+    <div class="comment-modal" id="benes-comment-modal">
+      <section class="comment-section">
+        <h2 class="comment-title">Benes Comments</h2>
+        <button class="close-comment" data-modal="benes-comment-modal">×</button>
+        <div class="comment-content">
+          <%= student.benes_note ? student.benes_note : 'No comments available' %>
+        </div>
+      </section>
+    </div>
+
+    <!-- Sanctions Comment Modal -->
+    <div class="comment-modal" id="sanctions-comment-modal">
+      <section class="comment-section">
+        <h2 class="comment-title">Sanctions Comments</h2>
+        <button class="close-comment" data-modal="sanctions-comment-modal">×</button>
+        <div class="comment-content">
+          <%= student.sanction_note ? student.sanction_note : 'No comments available' %>
+        </div>
+      </section>
+    </div>
+
+    <!-- Total Comment Modal -->
+    <div class="comment-modal" id="total-comment-modal">
+      <section class="comment-section">
+        <h2 class="comment-title">Total Comments</h2>
+        <button class="close-comment" data-modal="total-comment-modal">×</button>
+        <div class="comment-content">
+          <%= student.total_note ? student.total_note : 'No comments available' %>
+        </div>
+      </section>
+    </div>
+
+    <section class="benes">
+      <h2 class="benes-title">Benes and Sanctions</h2>
+      <div class="points">
+        <div class="positive">
+          <h3 class="benes-subtitle">Benes</h3>
+          <div class="benes-number"><%= student.benes %></div>
+          <button class="view-comment-button" data-modal="benes-comment-modal" aria-label="View Benes Comments">View Comments</button>
+        </div>
+        <div class="negative">
+          <h3 class="sanctions">Sanctions</h3>
+          <div class="sanctions-number"><%= student.sanctions %></div>
+          <button class="view-comment-button" data-modal="sanctions-comment-modal" aria-label="View Sanctions Comments">View Comments</button>
+        </div>
+        <div class="total">
+          <h3 class="total-subtitle">Total</h3>
+          <div class="total-number"><%= student.total %></div>
+          <button class="view-comment-button" data-modal="total-comment-modal" aria-label="View Total Comments">View Comments</button>
+        </div>
+      </div>
+    </section>
+
+    <a href="/help">
+      <button class="help-button">HELP</button>
+    </a>
+  </main>
+
+  <script src="/js/sidebar-hamburger.js"></script>
+  <script>
+    // Configure pdf.js worker
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js';
+
+    // Get elements for PDF preview
+    const previewButtons = document.querySelectorAll('.preview-button');
+    const pdfModal = document.getElementById('pdf-preview-modal');
+    const pdfContainer = document.getElementById('pdf-preview');
+    const closeButton = document.getElementById('close-preview');
+
+    // Function to show the PDF modal
+    function showModal() {
+      pdfModal.style.display = 'flex';
+    }
+
+    // Function to hide the PDF modal
+    function hideModal() {
+      pdfModal.style.display = 'none';
+      pdfContainer.innerHTML = '<div class="pdf-preview-loading">Select a report to preview</div>';
+    }
+
+    // Add click event listeners to preview buttons
+    previewButtons.forEach(button => {
+      button.addEventListener('click', async () => {
+        const pdfUrl = button.getAttribute('data-pdf-url');
+        if (!pdfUrl) {
+          pdfContainer.innerHTML = '<div class="pdf-preview-error">No PDF URL available</div>';
+          showModal();
+          return;
+        }
+
+        // Show loading message and modal
+        pdfContainer.innerHTML = '<div class="pdf-preview-loading">Loading PDF...</div>';
+        showModal();
+
+        try {
+          // Load the PDF
+          const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
+          pdfContainer.innerHTML = ''; // Clear loading message
+
+          // Render each page
+          for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+            const page = await pdf.getPage(pageNum);
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            pdfContainer.appendChild(canvas);
+
+            // Set canvas dimensions based on page size and scale for responsiveness
+            const scale = window.innerWidth < 768 ? 0.8 : 1.0; // Adjust scale for smaller screens
+            const viewport = page.getViewport({ scale: scale });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            // Render the page
+            await page.render({
+              canvasContext: context,
+              viewport: viewport
+            }).promise;
+          }
+        } catch (error) {
+          console.error('Error loading PDF:', error);
+          pdfContainer.innerHTML = '<div class="pdf-preview-error">Failed to load PDF</div>';
+        }
+      });
+    });
+
+    // Add click event to close button
+    closeButton.addEventListener('click', hideModal);
+
+    // Close modal when clicking outside the preview section
+    pdfModal.addEventListener('click', (e) => {
+      if (e.target === pdfModal) {
+        hideModal();
+      }
+    });
+
+    // Comment Modal Functionality
+    const commentButtons = document.querySelectorAll('.view-comment-button');
+    const commentModals = document.querySelectorAll('.comment-modal');
+    const closeCommentButtons = document.querySelectorAll('.close-comment');
+
+    function showCommentModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.style.display = 'flex';
+    }
+
+    function hideCommentModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.style.display = 'none';
+    }
+
+    commentButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const modalId = button.getAttribute('data-modal');
+        showCommentModal(modalId);
+      });
+    });
+
+    closeCommentButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const modalId = button.getAttribute('data-modal');
+        hideCommentModal(modalId);
+      });
+    });
+
+    commentModals.forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          hideCommentModal(modal.id);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

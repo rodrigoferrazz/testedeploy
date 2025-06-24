@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+  <link rel="icon" type="image/png" sizes="128x128" href="/assets/logo_title.png">
+  <title>Timetable ∙ St. Paul's</title>
+  <link rel="stylesheet" href="/css/timetable/style.css">
+  <link href="https://fonts.cdnfonts.com/css/archer-2" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/century-gothic-paneuropean" rel="stylesheet">
+  <link rel="stylesheet" href="/css/sidebar/style.css">
+  <link rel="stylesheet" href="/css/switch/style.css">
+  <!-- Panzoom library for zoom and pan -->
+  <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
+</head>
+<body>
+  <header class="mobile-header">
+    <button id="menu-toggle" class="hamburger" aria-label="Abrir menu">
+      <svg width="28" height="28" viewBox="0 0 24 24">
+        <path fill="#001D31" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/>
+      </svg>
+    </button>
+  </header>
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+  <div id="sidebar-container"></div>
+  <%- include('../layout/sidebar', { student, guardianId, activePage }) %>
+  <%- include('../components/switch', { student }) %>
+  
+  <div class="main-container">
+    <h2 class="page-title">Timetable</h2>
+
+    <div class="timetable-pagination">
+      <button class="week-btn prev" disabled>‹</button>
+      <span class="current-week">Week 1</span>
+      <button class="week-btn next">›</button>
+    </div>
+
+    <div class="timetable-container">
+      <div class="zoomable-container">
+        <img
+          src="<%= student.signed_timetables_url %>"
+          alt="Student timetable"
+          class="timetable-image"
+        />
+      </div>
+      <!-- Zoom controls now inside timetable-container -->
+      <div class="zoom-controls">
+        <button class="zoom-btn zoom-out" title="Zoom out">−</button>
+        <span class="zoom-level">100%</span>
+        <button class="zoom-btn zoom-in" title="Zoom in">+</button>
+      </div>
+    </div>
+
+    <a href="/help">
+      <button class="help-button">HELP</button>
+    </a>
+  </div>
+
+  <script src="/js/sidebar-hamburger.js"></script>
+  <script>
+    (function(){
+      const weeks = ['Week 1', 'Week 2'];
+      let idx = 0;
+      const prevBtn = document.querySelector('.week-btn.prev');
+      const nextBtn = document.querySelector('.week-btn.next');
+      const label = document.querySelector('.current-week');
+      const timetableImg = document.querySelector('.timetable-image');
+      let panzoomInstance = null;
+
+      function initializePanzoom() {
+        if (panzoomInstance) panzoomInstance.destroy();
+        panzoomInstance = Panzoom(timetableImg, {
+          maxScale: 4,
+          minScale: 0.5,
+          contain: 'outside',
+          cursor: 'grab',
+          doubleTap: true,
+          pinchToZoom: true,
+          touch: true
+        });
+        timetableImg.parentElement.addEventListener('wheel', panzoomInstance.zoomWithWheel);
+        timetableImg.parentElement.addEventListener('panzoomzoom', updateZoomLevel);
+        panzoomInstance.zoom(1);
+        updateZoomLevel();
+      }
+
+      function updateZoomLevel() {
+        if (!panzoomInstance) return;
+        let scale = panzoomInstance.getScale();
+        if (Math.abs(scale - 1) < 0.02) scale = 1;
+        document.querySelector('.zoom-level').textContent = `${Math.round(scale * 100)}%`;
+      }
+
+      function update() {
+        label.textContent = weeks[idx];
+        prevBtn.disabled = idx === 0;
+        nextBtn.disabled = idx === weeks.length - 1;
+        initializePanzoom();
+      }
+
+      document.querySelector('.zoom-in').addEventListener('click', () => { if (panzoomInstance) { panzoomInstance.zoomIn(); updateZoomLevel(); }});
+      document.querySelector('.zoom-out').addEventListener('click', () => { if (panzoomInstance) { panzoomInstance.zoomOut(); updateZoomLevel(); }});
+      prevBtn.addEventListener('click', () => { idx--; update(); });
+      nextBtn.addEventListener('click', () => { idx++; update(); });
+      document.addEventListener('DOMContentLoaded', update);
+    })();
+  </script>
+</body>
+</html>

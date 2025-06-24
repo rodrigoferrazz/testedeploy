@@ -1,0 +1,245 @@
+/* General body styling for the children selection page */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgba(130, 0, 33, 0.9);
+  font-family: 'Archer', serif;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Logo styling */
+.logo {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 120px;
+}
+
+/* Main container for centering content */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  padding: 60px 15px;
+}
+
+/* Title styling */
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+/* Container for the list of children */
+.children-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Button styling for each child */
+.child-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-family: 'Archer', sans-serif;
+  transition: transform 0.3s ease;
+}
+
+/* Child photo styling */
+.child-btn img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+/* Child name styling */
+.child-name {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect for child button */
+.child-btn:hover img,
+.child-btn:hover .child-name {
+  transform: translateY(-5px);
+}
+
+/* Help button styling */
+.help-btn {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  background-color: white;
+  color: #001D31;
+  border: none;
+  border-radius: 15px;
+  font-family: 'Archer', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 120px;
+  height: 25px;
+  font-size: 14px;
+}
+
+/* Logout container styling */
+.logout-container {
+  position: absolute;
+  left: 15px;
+  bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Logout icon styling */
+.logout-icon {
+  width: 20px;
+  height: auto;
+}
+
+/* Logout button styling */
+.logout-btn {
+  background-color: transparent;
+  color: #EBACAA;
+  font-family: 'Century Gothic', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-bottom: 4px;
+}
+
+/* No students message styling */
+.no-students {
+  font-size: 16px;
+}
+
+/* Media query for tablets (min-width: 600px) */
+@media (min-width: 600px) {
+  .logo {
+    width: 150px;
+    top: 20px;
+    left: 20px;
+  }
+
+  .main-container {
+    padding: 80px 20px;
+  }
+
+  .title {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+
+  .children-list {
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+
+  .child-btn img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 15px;
+  }
+
+  .child-name {
+    font-size: 28px;
+  }
+
+  .help-btn {
+    width: 150px;
+    height: 30px;
+    font-size: 16px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .logout-container {
+    left: 20px;
+    bottom: 20px;
+  }
+
+  .logout-icon {
+    width: 22px;
+  }
+
+  .logout-btn {
+    font-size: 15px;
+  }
+
+  .no-students {
+    font-size: 18px;
+  }
+}
+
+/* Media query for desktops (min-width: 1024px) */
+@media (min-width: 1024px) {
+  .logo {
+    width: 160px;
+    top: 25px;
+    left: 25px;
+  }
+
+  .main-container {
+    padding: 80px 25px;
+  }
+
+  .title {
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+
+  .children-list {
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+
+  .child-btn img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 15px;
+  }
+
+  .child-name {
+    font-size: 28px;
+  }
+
+  .help-btn {
+    width: 160px;
+    height: 30px;
+    font-size: 16px;
+    bottom: 25px;
+    right: 25px;
+  }
+
+  .logout-container {
+    left: 50px;
+    bottom: 25px;
+  }
+
+  .logout-icon {
+    width: 22px;
+  }
+
+  .logout-btn {
+    font-size: 15px;
+  }
+
+  .no-students {
+    font-size: 18px;
+  }
+}

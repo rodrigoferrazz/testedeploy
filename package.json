@@ -1,0 +1,26 @@
+{
+  "name": "jadd",
+  "version": "1.0.0",
+  "description": "School portal for St.Paul's",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "init-db": "node scripts/runSQLScript.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.9",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.10",
+    "express": "^4.17.1",
+    "pg": "^8.16.0"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "jest": "^27.0.6",
+    "nodemon": "^3.1.10",
+    "supertest": "^6.1.3"
+  }
+}
